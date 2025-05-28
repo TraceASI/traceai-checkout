@@ -80,7 +80,7 @@
       color: #fff;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 12px;
       font-size: 15px;
@@ -91,7 +91,7 @@
       transition: border-color 0.2s ease;
     }
 
-    input:focus, select:focus {
+    input:focus {
       border-color: var(--accent-color);
       outline: none;
     }
@@ -186,24 +186,13 @@
       <input type="text" placeholder="New York">
 
       <label>State</label>
-      <select>
-        <option>-- State --</option>
-        <option>New York</option>
-        <option>California</option>
-        <option>Texas</option>
-      </select>
+      <input type="text" placeholder="Enter your state">
 
       <label>Zip Code</label>
       <input type="text" placeholder="10001">
 
       <label>Country</label>
-      <select>
-        <option>United States</option>
-        <option>United Kingdom</option>
-        <option>Canada</option>
-        <option>Australia</option>
-        <option>Other</option>
-      </select>
+      <input type="text" placeholder="Enter your country">
     </div>
 
     <!-- Payment Info -->
