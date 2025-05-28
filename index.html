@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TraceAI Checkout</title>
+  <style>
+    :root {
+      --primary-color: #0a2342;
+      --accent-color: #1f5fff;
+      --text-color: #ffffff;
+      --input-bg: #ffffff;
+      --input-text: #111;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--primary-color);
+      padding: 40px 20px;
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 40px;
+      border-radius: var(--border-radius);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header img {
+      height: 120px;
+      margin-bottom: 10px;
+    }
+
+    .header h2 {
+      font-size: 28px;
+      margin: 10px 0 6px;
+    }
+
+    .header p {
+      font-size: 20px;
+      color: #ccc;
+      font-weight: 500;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      background: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid #ccc;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+
+    .accepted-cards {
+      margin-top: 5px;
+    }
+
+    .accepted-cards img {
+      height: 28px;
+      margin-right: 10px;
+    }
+
+    .pay-button {
+      width: 100%;
+      margin-top: 40px;
+      background: linear-gradient(to right, #1f5fff, #597eff);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 16px;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .pay-button:hover {
+      background: linear-gradient(to right, #194ad3, #3b6cf2);
+    }
+
+    .terms {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .terms a {
+      color: #b4caff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 10px;
+      }
+
+      .header img {
+        height: 90px;
+      }
+
+      .header h2 {
+        font-size: 24px;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="https://app.traceasi.com/assets/images/trace/traceailogo-nobg.png" alt="TraceAI Logo">
+    <h2>Annual Gold</h2>
+    <p>Total: $3,995.00</p>
+  </div>
+
+  <div class="row">
+    <!-- Billing Info -->
+    <div class="column">
+      <h3>Billing Information</h3>
+      <label>First Name</label>
+      <input type="text" placeholder="John">
+
+      <label>Last Name</label>
+      <input type="text" placeholder="Doe">
+
+      <label>Email</label>
+      <input type="email" placeholder="john@example.com">
+
+      <label>Phone (For SMS Alerts)</label>
+      <input type="tel" placeholder="(000) 000-0000">
+
+      <label>Address</label>
+      <input type="text" placeholder="542 W. 15th Street">
+
+      <label>City</label>
+      <input type="text" placeholder="New York">
+
+      <label>State</label>
+      <select>
+        <option>-- State --</option>
+        <option>New York</option>
+        <option>California</option>
+        <option>Texas</option>
+      </select>
+
+      <label>Zip Code</label>
+      <input type="text" placeholder="10001">
+
+      <label>Country</label>
+      <select>
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Canada</option>
+        <option>Australia</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <!-- Payment Info -->
+    <div class="column">
+      <h3>Payment Details</h3>
+      <label>Accepted Cards</label>
+      <div class="accepted-cards">
+        <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+        <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Mastercard">
+        <img src="https://img.icons8.com/color/48/amex.png" alt="Amex">
+        <img src="https://img.icons8.com/color/48/discover.png" alt="Discover">
+      </div>
+
+      <label>Card Number</label>
+      <input type="text" placeholder="0000 0000 0000 0000">
+
+      <label>Expiration Date</label>
+      <input type="text" placeholder="MM / YY">
+
+      <label>CVV</label>
+      <input type="text" placeholder="***">
+    </div>
+  </div>
+
+  <button class="pay-button">Pay $3,995.00</button>
+
+  <div class="terms">
+    TERMS: Due to the analysts' cost and time for the mentorship, all Gold sales are final.<br>
+    Please visit <a href="https://www.traceasi.com/terms-of-service" target="_blank">traceasi.com/terms-of-service</a> for full details.
+  </div>
+</div>
+
+</body>
+</html>
