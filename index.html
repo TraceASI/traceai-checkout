@@ -3,128 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TraceAI Checkout</title>
+  <title>TraceAI $5 Checkout</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=BAAb_akMrupNOk1cQQlx5FLyPHEyZpX9Q_-VFPBtmdWtoDEysqATchT7nyTjJbD2PkOhVGI3GmvE2X4RRs&currency=USD"></script>
+
   <style>
-    :root {
-      --primary-color: #0a2342;
-      --accent-color: #1f5fff;
-      --text-color: #ffffff;
-      --input-bg: #ffffff;
-      --input-text: #111;
-      --border-radius: 12px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: var(--primary-color);
+      background: #0a2342;
+      color: #fff;
+      margin: 0;
       padding: 40px 20px;
-      color: var(--text-color);
     }
 
     .container {
-      max-width: 960px;
+      max-width: 600px;
       margin: auto;
+      background: #132d4c;
       padding: 40px;
-      border-radius: var(--border-radius);
-    }
-
-    .header {
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
       text-align: center;
-      margin-bottom: 40px;
     }
 
-    .header img {
-      height: 120px;
-      margin-bottom: 10px;
-    }
-
-    .header h2 {
-      font-size: 28px;
-      margin: 10px 0 6px;
-    }
-
-    .header p {
-      font-size: 20px;
-      color: #ccc;
-      font-weight: 500;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-
-    .column {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    h3 {
+    h1, h2 {
       margin-bottom: 20px;
-      font-size: 20px;
+    }
+
+    #paypal-button-container {
+      margin-top: 30px;
+    }
+
+    #error-message {
+      color: #ff6b6b;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #congrats-section {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       color: #fff;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
     }
 
-    label {
-      display: block;
-      margin: 15px 0 6px;
-      font-weight: 600;
-      font-size: 14px;
-      color: #fff;
+    #congrats-section h1 {
+      font-size: 3rem;
+      z-index: 1;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
 
-    input {
+    #congrats-section p {
+      font-size: 1.5rem;
+      margin-top: 15px;
+      z-index: 1;
+    }
+
+    #stars {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      padding: 12px;
-      font-size: 15px;
-      border-radius: 8px;
-      background: var(--input-bg);
-      color: var(--input-text);
-      border: 1px solid #ccc;
-      transition: border-color 0.2s ease;
-    }
-
-    input:focus {
-      border-color: var(--accent-color);
-      outline: none;
-    }
-
-    .accepted-cards {
-      margin-top: 5px;
-    }
-
-    .accepted-cards img {
-      height: 28px;
-      margin-right: 10px;
-    }
-
-    .pay-button {
-      width: 100%;
-      margin-top: 40px;
-      background: linear-gradient(to right, #1f5fff, #597eff);
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      padding: 16px;
-      border: none;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .pay-button:hover {
-      background: linear-gradient(to right, #194ad3, #3b6cf2);
+      height: 100%;
+      z-index: 0;
     }
 
     .terms {
-      text-align: center;
       margin-top: 30px;
       font-size: 13px;
       color: #ccc;
@@ -134,96 +83,99 @@
       color: #b4caff;
       text-decoration: none;
     }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 30px 10px;
-      }
-
-      .header img {
-        height: 90px;
-      }
-
-      .header h2 {
-        font-size: 24px;
-      }
-
-      .row {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <img src="https://app.traceasi.com/assets/images/trace/traceailogo-nobg.png" alt="TraceAI Logo">
-    <h2>Annual Gold</h2>
-    <p>Total: $3,995.00</p>
-  </div>
+<div id="checkout-section">
+  <div class="container">
+    <img src="https://app.traceasi.com/assets/images/trace/traceailogo-nobg.png" style="height:100px; margin-bottom: 20px;">
+    <h2>Total: $5.00</h2>
 
-  <div class="row">
-    <!-- Billing Info -->
-    <div class="column">
-      <h3>Billing Information</h3>
-      <label>First Name</label>
-      <input type="text" placeholder="John">
+    <div id="paypal-button-container"></div>
+    <div id="error-message"></div>
 
-      <label>Last Name</label>
-      <input type="text" placeholder="Doe">
-
-      <label>Email</label>
-      <input type="email" placeholder="john@example.com">
-
-      <label>Phone (For SMS Alerts)</label>
-      <input type="tel" placeholder="(000) 000-0000">
-
-      <label>Address</label>
-      <input type="text" placeholder="542 W. 15th Street">
-
-      <label>City</label>
-      <input type="text" placeholder="New York">
-
-      <label>State</label>
-      <input type="text" placeholder="Enter your state">
-
-      <label>Zip Code</label>
-      <input type="text" placeholder="10001">
-
-      <label>Country</label>
-      <input type="text" placeholder="Enter your country">
+    <div class="terms">
+      All $5 payments are non-refundable and final.<br>
+      Visit <a href="https://www.traceasi.com/terms-of-service" target="_blank">traceasi.com/terms-of-service</a> for details.
     </div>
-
-    <!-- Payment Info -->
-    <div class="column">
-      <h3>Payment Details</h3>
-      <label>Accepted Cards</label>
-      <div class="accepted-cards">
-        <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
-        <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Mastercard">
-        <img src="https://img.icons8.com/color/48/amex.png" alt="Amex">
-        <img src="https://img.icons8.com/color/48/discover.png" alt="Discover">
-      </div>
-
-      <label>Card Number</label>
-      <input type="text" placeholder="0000 0000 0000 0000">
-
-      <label>Expiration Date</label>
-      <input type="text" placeholder="MM / YY">
-
-      <label>CVV</label>
-      <input type="text" placeholder="***">
-    </div>
-  </div>
-
-  <button class="pay-button">Pay $3,995.00</button>
-
-  <div class="terms">
-    TERMS: Due to the analysts' cost and time for the mentorship, all Gold sales are final.<br>
-    Please visit <a href="https://www.traceasi.com/terms-of-service" target="_blank">traceasi.com/terms-of-service</a> for full details.
   </div>
 </div>
+
+<!-- Congrats Screen -->
+<div id="congrats-section">
+  <h1>Welcome to CRYPTOPIA</h1>
+  <p>Congratulations! Your payment has been received.</p>
+  <canvas id="stars"></canvas>
+</div>
+
+<script>
+  paypal.Buttons({
+    style: {
+      layout: 'vertical',
+      color: 'blue',
+      shape: 'pill',
+      label: 'pay'
+    },
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '5.00'
+          },
+          description: '$5 Entry - Trace ASI'
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        document.getElementById("checkout-section").style.display = "none";
+        document.getElementById("congrats-section").style.display = "flex";
+      });
+    },
+    onError: function(err) {
+      console.error(err);
+      document.getElementById("error-message").textContent = "❌ Payment failed. Please try again.";
+    }
+  }).render('#paypal-button-container');
+</script>
+
+<script>
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 300 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.5,
+      vx: Math.random() * 0.2 - 0.1,
+      vy: Math.random() * 0.2 - 0.1
+    }));
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ffffff';
+    stars.forEach(s => {
+      s.x += s.vx;
+      s.y += s.vy;
+      if (s.x < 0 || s.x > canvas.width) s.vx = -s.vx;
+      if (s.y < 0 || s.y > canvas.height) s.vy = -s.vy;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  drawStars();
+</script>
 
 </body>
 </html>
